@@ -1,0 +1,24 @@
+.role-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.role-button {
+  padding: 12px 20px;
+  border: 2px solid #888;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 1rem;
+}
+
+.role-button:hover {
+  background-color: #e6e6e6;
+}
+
+.role-button.selected {
+  background-color: #28a745;
+  color: white;
+  border-color: #1e7e34;
+}
