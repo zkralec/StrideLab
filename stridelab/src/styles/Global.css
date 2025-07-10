@@ -1,0 +1,63 @@
+/* global.css */
+
+:root {
+  --font-main: 'Inter', sans-serif;
+  --color-bg: #1f2937;
+  --color-text: #f9fafb;
+  --color-primary: #3b82f6;
+  --color-accent: #2563eb;
+  --color-muted: #9ca3af;
+  --border-radius: 12px;
+  --transition-default: all 0.25s ease;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-main);
+  transition: var(--transition-default);
+}
+
+input, button, select, textarea {
+  font-family: inherit;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-muted);
+  background-color: #374151;
+  color: var(--color-text);
+  transition: var(--transition-default);
+  outline: none;
+}
+
+button {
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-accent);
+}
+
+h1, h2, h3, h4, h5 {
+  margin-top: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.card {
+  background-color: #2d3748;
+  color: var(--color-text);
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: var(--transition-default);
+}
