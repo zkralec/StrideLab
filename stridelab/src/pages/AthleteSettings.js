@@ -23,7 +23,6 @@ const goalOptions = [
 const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
 export default function AthleteSettings() {
-  const [userData, setUserData] = useState(null);
   const [events, setEvents] = useState([]);
   const [availability, setAvailability] = useState([]);
   const [goals, setGoals] = useState([]);
@@ -41,7 +40,6 @@ export default function AthleteSettings() {
       const docSnap = await getDoc(userRef);
       if (docSnap.exists()) {
         const data = docSnap.data();
-        setUserData(data);
         setName(data.name || "");
         setAge(data.age || "");
         setEvents(data.events || []);
