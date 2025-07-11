@@ -41,40 +41,57 @@ Athlete Info:
 - Include weight training: ${includeWeights ? "Yes" : "No"}
 
 ### PLAN FORMAT ###
-Return a JSON object structured as:
+Return a JSON object structured like this:
+
 {
   "workoutPlan": [
     {
-      "day": "Monday",
-      "focus": "Sprint technique + acceleration",
-      "warmup": "Dynamic warmup: light jog (5-8 minutes), leg swings, A-skips, B-skips, high knees, butt kicks, hip mobility, sprint drills (e.g. bounding, straight leg runs), and 3 progressive accelerations.",
-      "workout": "4x60m sprints at 100%. 3x30m sled pushes. 3x flying 20s at 100%. 3x50m block starts at 100%.",
-      "cooldown": "10-minute jog. Full body static stretching (especially hamstrings, calves, hip flexors). Foam rolling.",
-      "notes": "Ensure full recovery between reps to maintain form and speed."
+      "week": 1,
+      "days": [
+        {
+          "day": "Monday",
+          "focus": "Sprint technique + acceleration",
+          "warmup": "Dynamic warmup: light jog (5-8 minutes), leg swings, A-skips, B-skips, high knees, butt kicks, hip mobility, sprint drills (e.g. bounding, straight leg runs), and 3 progressive accelerations.",
+          "workout": "4x60m sprints at 100%. 3x30m sled pushes. 3x flying 20s. 3x block starts.",
+          "cooldown": "10-minute jog. Full body static stretching (especially hamstrings, calves, hip flexors). Foam rolling.",
+          "notes": "Ensure full recovery between reps."
+        },
+        ...
+      ]
     },
     ...
-  ]
-  ${includeWeights ? `,
+  ],
+  ${includeWeights ? `
   "weightPlan": [
     {
-      "day": "Monday",
-      "exercises": "Heavy compound lifts: 5x5 back squat, 3x8 deadlift, 3x12 hamstring curls, core circuit."
+      "week": 1,
+      "days": [
+        {
+          "day": "Monday",
+          "exercises": "5x5 back squat, 3x8 deadlift, 3x12 hamstring curls, core circuit."
+        }
+      ]
     }
-  ]` : ""}
+  ]
+  ` : ""}
 }
 
 ### IMPORTANT GUIDELINES ###
-- For sprint/jump/hurdle/power athletes: include long and thorough warm-ups and cooldowns (as injury prevention is critical).
-- For distance events: warm-ups can be lighter, but still complete and include mobility and activation.
-- Each warm-up must include at least **7–10 components**, not just a jog or two drills.
-- Workouts should include **varied, event-specific drills** each day.
-- Cooldowns must include jog/light movement and full-body stretching or recovery tools.
-- Weight plans must include at least **6-10 lifts/movements**, make each one specific to specified goals and events.
-- Spread intensity throughout the week, avoid doubling up multiple hard workouts on back-to-back days.
-- Align with the athlete's availability. Do not assign workouts on unavailable days.
+- Warm-ups must include at least **7–10 structured elements**, especially for sprint/jump/hurdle athletes.
+- ✅ The 'workout' section must ONLY include **running workouts (sprints, intervals, technique drills)** or **field event-specific drills**.
+- ❌ DO NOT include **any weightlifting, gym-based strength training, or resistance work** in the 'workout' section — these belong ONLY in the \`weightPlan\` (if enabled).
+- Field event drills must be specific and technically accurate. Avoid incorrect reps/distances. Example:
+  - ✔️ "3x3-step javelin throws", ❌ "3x50m javelin throws"
+  - ✔️ "High bar swing drills for pole vault", ❌ "Pole vault 200m runs"
+- Cooldowns must include light movement and stretching or rolling.
+- Weight plans must include at least **6–10 compound lifts or relevant strength movements** each day, and must only appear in the \`weightPlan\`.
+- Workouts should be practical and realistic, tailored to the athlete's goals and events.
+- Do not duplicate sessions across days. Be intentional with recovery.
+- Assign sessions only on available days.
+- Ensure the JSON structure is correct and parseable.
+
+Output only valid JSON.
 `;
-
-
 
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
@@ -118,31 +135,36 @@ Return a JSON object structured as:
     return () => clearInterval(interval);
   }, [loading]);
 
-  const renderTable = (title, data) => (
+  const renderWeeklyPlans = (title, weeklyData, type = "days") => (
     <div className="plan-section">
       <h2>{title}</h2>
-      <table>
-        <thead>
-          <tr>
-            {Object.keys(data[0]).map((key) => (
-              <th key={key}>{key.toUpperCase()}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((day, idx) => (
-            <tr key={idx}>
-              {Object.values(day).map((val, k) => (
-                <td key={k}>
-                  {typeof val === "string"
-                    ? val.split(". ").map((line, i) => <div key={i}>{line.trim()}</div>)
-                    : JSON.stringify(val)}
-                </td>
+      {weeklyData.map((week, idx) => (
+        <div key={idx}>
+          <h3>Week {week.week}</h3>
+          <table>
+            <thead>
+              <tr>
+                {Object.keys(week[type][0]).map((key) => (
+                  <th key={key}>{key.toUpperCase()}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {week[type].map((entry, i) => (
+                <tr key={i}>
+                  {Object.values(entry).map((val, j) => (
+                    <td key={j}>
+                      {typeof val === "string"
+                        ? val.split(". ").map((line, k) => <div key={k}>{line.trim()}</div>)
+                        : JSON.stringify(val)}
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </div>
+      ))}
     </div>
   );
 
@@ -164,8 +186,8 @@ Return a JSON object structured as:
       {error && <div className="error">{error}</div>}
 
       <div ref={planRef}>
-        {plan?.workoutPlan && renderTable("Workout Plan", plan.workoutPlan)}
-        {plan?.weightPlan && renderTable("Weight Training Plan", plan.weightPlan)}
+        {plan?.workoutPlan && renderWeeklyPlans("Workout Plan", plan.workoutPlan)}
+        {plan?.weightPlan && renderWeeklyPlans("Weight Training Plan", plan.weightPlan, "days")}
       </div>
     </div>
   );
