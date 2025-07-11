@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { auth, db } from "../utils/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import '../styles/AthleteSignup.css';
 
 export default function AthleteSignup() {
@@ -45,6 +45,9 @@ export default function AthleteSignup() {
           onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Create Account</button>
       </form>
+      <p style={{ marginTop: "1rem" }}>
+        Already have an account? <Link to="/">Login</Link>
+      </p>
     </div>
   );
 }

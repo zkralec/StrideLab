@@ -23,6 +23,7 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+  margin-top: 15px;
   margin-bottom: 20px;
   flex-wrap: wrap;
 }
@@ -50,11 +51,31 @@
 .weights-toggle {
   margin-top: 30px;
   font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-.weights-toggle input[type="checkbox"] {
-  margin-right: 10px;
-  transform: scale(1.2);
+.toggle-label {
+  color: #f5f5f5;
+}
+
+.selectable-button {
+  padding: 10px 16px;
+  border: 2px solid #3d6ef7;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.selectable-button.selected {
+  background-color: #3d6ef7;
+  color: #fff;
 }
 
 .settings-button {
@@ -79,4 +100,22 @@
   font-size: 0.9rem;
   margin-top: 20px;
   color: #ccc;
+}
+
+.logout-button {
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  background-color: #3d6ef7;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #2a5ee8;
 }

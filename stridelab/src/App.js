@@ -6,6 +6,7 @@ import AthleteOnboarding from "./pages/AthleteOnboarding";
 import AthleteDashboard from "./pages/AthleteDashboard";
 import AthleteSettings from "./pages/AthleteSettings";
 import PlanGenerator from "./components/PlanGenerator";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/dashboard" element={<AthleteDashboard />} />
         <Route path="/settings" element={<AthleteSettings />} />
         <Route path="/plan" element={<PlanGenerator />} />
+        <Route path="/forgot" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

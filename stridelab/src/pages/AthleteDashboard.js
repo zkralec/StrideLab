@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { auth, db } from "../utils/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import "../styles/AthleteDashboard.css";
 
@@ -32,11 +33,19 @@ export default function AthleteDashboard() {
     navigate(`/plan?duration=${duration}&weights=${includeWeights}`);
   };
 
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
+
   if (!userData) return null;
 
   return (
     <div className="dashboard-container">
       <div className="dashboard-header">
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
         <h1>Welcome to StrideLab</h1>
         <button className="settings-button" onClick={() => navigate("/settings")}>
           Settings
@@ -53,14 +62,13 @@ export default function AthleteDashboard() {
         </div>
 
         <div className="weights-toggle">
-          <label>
-            <input
-              type="checkbox"
-              checked={includeWeights}
-              onChange={(e) => setIncludeWeights(e.target.checked)}
-            />
-            Include Weight Training
-          </label>
+          <span className="toggle-label">Include Weight Training:</span>
+          <button
+            className={`selectable-button ${includeWeights ? "selected" : ""}`}
+            onClick={() => setIncludeWeights(!includeWeights)}
+          >
+            {includeWeights ? "Yes" : "No"}
+          </button>
         </div>
       </div>
     </div>
