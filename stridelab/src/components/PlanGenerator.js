@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { auth, db } from "../utils/firebase";
 import { doc, getDoc } from "firebase/firestore";
+// eslint-disable-next-line
 import html2pdf from "html2pdf.js";
 import "../styles/PlanGenerator.css";
 
