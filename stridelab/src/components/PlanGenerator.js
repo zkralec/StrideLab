@@ -12,6 +12,7 @@ export default function PlanGenerator() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const planRef = useRef(null); // For PDF export
+  const [loadingDots, setLoadingDots] = useState(".");
 
   const duration = searchParams.get("duration");
   const includeWeights = searchParams.get("weights") === "true";
@@ -68,9 +69,12 @@ Return a JSON object structured as:
 - Each warm-up must include at least **7–10 components**, not just a jog or two drills.
 - Workouts should include **varied, event-specific drills** each day.
 - Cooldowns must include jog/light movement and full-body stretching or recovery tools.
+- Weight plans must include at least **6-10 lifts/movements**, make each one specific to specified goals and events.
 - Spread intensity throughout the week, avoid doubling up multiple hard workouts on back-to-back days.
 - Align with the athlete's availability. Do not assign workouts on unavailable days.
 `;
+
+
 
         const response = await fetch("https://api.openai.com/v1/chat/completions", {
           method: "POST",
@@ -103,6 +107,16 @@ Return a JSON object structured as:
 
     fetchPlan();
   }, [duration, includeWeights]);
+
+  useEffect(() => {
+    if (!loading) return;
+
+    const interval = setInterval(() => {
+      setLoadingDots((prev) => (prev === "..." ? "." : prev + "."));
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, [loading]);
 
   const renderTable = (title, data) => (
     <div className="plan-section">
@@ -145,8 +159,8 @@ Return a JSON object structured as:
         <button onClick={downloadPDF} className="pdf-btn">Save as PDF</button>
       </div>
 
-      <h1>Your Training Plan</h1>
-      {loading && <div className="loading">Generating your plan... Please wait.</div>}
+      <h1>Your Personalized Training Plan</h1>
+      {loading && <div className="loading">Generating your plan{loadingDots}</div>}
       {error && <div className="error">{error}</div>}
 
       <div ref={planRef}>
