@@ -70,3 +70,6 @@ node_modules/
 
 # firebase api key
 src/utils/firebase.js
+
+# build folder secrets
+/build
