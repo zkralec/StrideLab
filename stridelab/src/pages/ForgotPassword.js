@@ -32,8 +32,6 @@ export default function ForgotPassword() {
     <div className="login-container">
       <h2>Reset Password</h2>
       <form onSubmit={handleReset}>
-        {error && <p className="error">{error}</p>}
-        {message && <p style={{ color: "#00e676", fontWeight: "500" }}>{message}</p>}
         <input
           type="email"
           placeholder="Enter your email"
@@ -41,6 +39,8 @@ export default function ForgotPassword() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        {message && <p className="inline-success">{message}</p>}
+        {error && <p className="inline-error">{error}</p>}
         <button type="submit">Send Reset Email</button>
       </form>
       <p><Link to="/">Back to login</Link></p>

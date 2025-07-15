@@ -25,7 +25,6 @@ export default function Login() {
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        {error && <p className="error">{error}</p>}
         <input
           type="email"
           placeholder="Email"
@@ -40,6 +39,7 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        {error && <p className="inline-error">{error}</p>}
         <button type="submit">Login</button>
       </form>
       <p>

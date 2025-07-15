@@ -3,6 +3,7 @@ import { auth, db } from "../utils/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/AthleteDashboard.css";
 
 export default function AthleteDashboard() {
@@ -51,6 +52,15 @@ export default function AthleteDashboard() {
           Settings
         </button>
       </div>
+
+      {auth.currentUser?.email === process.env.REACT_APP_ADMIN_EMAIL && (
+        <div className="admin-tools">
+          <p>Admin Tools:</p>
+          <Link to="/manage-invites">
+            <button className="admin-button">Open Invite Manager</button>
+          </Link>
+        </div>
+      )}
 
       <div className="dashboard-content">
         <p>Select an option to generate your workout plan:</p>

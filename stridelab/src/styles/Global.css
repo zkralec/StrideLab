@@ -87,3 +87,29 @@ a {
 a:hover {
   color: var(--accent-color);
 }
+
+.inline-error {
+  background-color: #3b1d1d;
+  color: #ff6b6b;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin: 12px 0 0px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(255, 0, 0, 0.1);
+}
+
+.inline-success {
+  background-color: #1f3b2c;
+  color: #38f89f;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin: 12px 0 0px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0, 255, 153, 0.08);
+}

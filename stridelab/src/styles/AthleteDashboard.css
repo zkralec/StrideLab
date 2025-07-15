@@ -96,12 +96,6 @@
   background-color: #2a5ee8;
 }
 
-.locked-info {
-  font-size: 0.9rem;
-  margin-top: 20px;
-  color: #ccc;
-}
-
 .logout-button {
   position: absolute;
   top: 20px;
@@ -118,4 +112,26 @@
 
 .logout-button:hover {
   background-color: #2a5ee8;
+}
+
+.admin-tools p {
+  text-align: center;
+  margin-block: 10px;
+  margin-top: -30px;
+}
+
+.admin-button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  background-color: #3d6ef7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.admin-button:hover {
+  background-color: #3d6ef7;
 }

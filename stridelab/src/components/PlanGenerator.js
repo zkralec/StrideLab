@@ -178,7 +178,7 @@ Output only valid JSON.
   return (
     <div className="plan-container">
       <div className="plan-controls">
-        <button onClick={() => navigate("/dashboard")} className="back-btn">← Back to Dashboard</button>
+        <button onClick={() => navigate("/dashboard")} className="back-btn">Back</button>
         <button onClick={downloadPDF} className="pdf-btn">Save as PDF</button>
       </div>
 

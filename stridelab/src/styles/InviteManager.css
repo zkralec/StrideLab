@@ -1,0 +1,86 @@
+.invite-manager-container {
+  background-color: #1e2a38;
+  color: #f5f5f5;
+  padding: 40px;
+  max-width: 700px;
+  margin: 80px auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.invite-manager-container h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.invite-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.invite-actions button {
+  flex: 1;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #3d6ef7;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.invite-actions button:hover {
+  background-color: #2a5ee8;
+}
+
+.new-code {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #38f89f;
+  background-color: #1b3b2c;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.invite-message {
+  font-size: 0.95rem;
+  color: #ff9f4d;
+  background-color: #382b1e;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+section {
+  margin-top: 32px;
+}
+
+section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #f5f5f5;
+}
+
+section ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+section li {
+  background-color: #2c3e50;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #e0f2fe;
+  word-break: break-all;
+}
